@@ -130,6 +130,7 @@ void drawGraphics(Chip8 *chip8) {
     }
     chip8->drawFlag = 0;
     putchar('\n');
+    //keyDump(chip8);
     fflush(stdout);
     usleep(2000);
 }
@@ -155,24 +156,31 @@ char getKey() {
 
 void setKeys(Chip8 *chip8) {
     char c = getKey();
-    if (c == '1')  chip8->key[0x1] = 1;     else  chip8->key[0x1] = 0;
-    if (c == '2')  chip8->key[0x2] = 1;     else  chip8->key[0x2] = 0;
-    if (c == '3')  chip8->key[0x3] = 1;     else  chip8->key[0x3] = 0;
-    if (c == '4')  chip8->key[0xC] = 1;     else  chip8->key[0xC] = 0;
-    if (c == 'q')  chip8->key[0x4] = 1;     else  chip8->key[0x4] = 0;
-    if (c == 'w')  chip8->key[0x5] = 1;     else  chip8->key[0x5] = 0;
-    if (c == 'e')  chip8->key[0x6] = 1;     else  chip8->key[0x6] = 0;
-    if (c == 'r')  chip8->key[0xD] = 1;     else  chip8->key[0xD] = 0;
-    if (c == 'a')  chip8->key[0x7] = 1;     else  chip8->key[0x7] = 0;
-    if (c == 's')  chip8->key[0x8] = 1;     else  chip8->key[0x8] = 0;
-    if (c == 'd')  chip8->key[0x9] = 1;     else  chip8->key[0x9] = 0;
-    if (c == 'f')  chip8->key[0xE] = 1;     else  chip8->key[0xE] = 0;
-    if (c == 'z')  chip8->key[0xA] = 1;     else  chip8->key[0xA] = 0;
-    if (c == 'x')  chip8->key[0x0] = 1;     else  chip8->key[0x0] = 0;
-    if (c == 'c')  chip8->key[0xB] = 1;     else  chip8->key[0xB] = 0;
-    if (c == 'v')  chip8->key[0xF] = 1;     else  chip8->key[0xF] = 0;
+    if (c == '1')  chip8->key[0x1] = KEY_DELAY;     else if (chip8->key[0x1] > 0) chip8->key[0x1]--;
+    if (c == '2')  chip8->key[0x2] = KEY_DELAY;     else if (chip8->key[0x2] > 0) chip8->key[0x2]--;
+    if (c == '3')  chip8->key[0x3] = KEY_DELAY;     else if (chip8->key[0x3] > 0) chip8->key[0x3]--;
+    if (c == '4')  chip8->key[0xC] = KEY_DELAY;     else if (chip8->key[0xC] > 0) chip8->key[0xC]--;
+    if (c == 'q')  chip8->key[0x4] = KEY_DELAY;     else if (chip8->key[0x4] > 0) chip8->key[0x4]--;
+    if (c == 'w')  chip8->key[0x5] = KEY_DELAY;     else if (chip8->key[0x5] > 0) chip8->key[0x5]--;
+    if (c == 'e')  chip8->key[0x6] = KEY_DELAY;     else if (chip8->key[0x6] > 0) chip8->key[0x6]--;
+    if (c == 'r')  chip8->key[0xD] = KEY_DELAY;     else if (chip8->key[0xD] > 0) chip8->key[0xD]--;
+    if (c == 'a')  chip8->key[0x7] = KEY_DELAY;     else if (chip8->key[0x7] > 0) chip8->key[0x7]--;
+    if (c == 's')  chip8->key[0x8] = KEY_DELAY;     else if (chip8->key[0x8] > 0) chip8->key[0x8]--;
+    if (c == 'd')  chip8->key[0x9] = KEY_DELAY;     else if (chip8->key[0x9] > 0) chip8->key[0x9]--;
+    if (c == 'f')  chip8->key[0xE] = KEY_DELAY;     else if (chip8->key[0xE] > 0) chip8->key[0xE]--;
+    if (c == 'z')  chip8->key[0xA] = KEY_DELAY;     else if (chip8->key[0xA] > 0) chip8->key[0xA]--;
+    if (c == 'x')  chip8->key[0x0] = KEY_DELAY;     else if (chip8->key[0x0] > 0) chip8->key[0x0]--;
+    if (c == 'c')  chip8->key[0xB] = KEY_DELAY;     else if (chip8->key[0xB] > 0) chip8->key[0xB]--;
+    if (c == 'v')  chip8->key[0xF] = KEY_DELAY;     else if (chip8->key[0xF] > 0) chip8->key[0xF]--;
     if (c == 0x1B || c == 0x04) {
         putchar('\n');
         exit(EXIT_SUCCESS);
     }
+}
+
+
+void keyDump(Chip8 *chip8) {
+    puts("\n");
+    for (unsigned short i = 0; i < KEYS_NUMBER; i++)
+        printf("%x - %u\n", i, chip8->key[i]);
 }

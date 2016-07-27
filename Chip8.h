@@ -18,6 +18,7 @@
 #define GFX_PIXELS GFX_WIDTH * GFX_HEIGHT
 #define STACK_SIZE 16
 #define KEYS_NUMBER 16
+#define KEY_DELAY 25
 
 
 // Chip8 struct definition
@@ -56,6 +57,7 @@ void decodeOpcode(Chip8 *chip8);
 void updateTimers(Chip8 *chip8);
 void drawGraphics(Chip8 *chip8);
 void setKeys(Chip8 *chip8);
+void keyDump(Chip8 *chip8);
 
 
 #endif /* CHIP8 */
